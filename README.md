@@ -1,17 +1,18 @@
 # k8s_stateful_app
-k8s cheat sheet:
-https://kubernetes.io/docs/reference/kubectl/cheatsheet/
-exposing app to the external world
-https://kubernetes.io/docs/tutorials/services/source-ip/
-
 to deploy:
 - create volume claims and volumes
-kubectl apply -f volume_claim_init_sql.yml,volume_claim_mysql_data.yml
+  kubectl apply -f volume_claim_init_sql.yml,volume_claim_mysql_data.yml
+
 - create database deployment and service
-kubectl apply -f mysql_578.yml
+  kubectl apply -f mysql_578.yml
 
 - create petclinic deployment and service
 kubectl apply -f petclinic.yml
+
+- create service that exposes application via the cluster ip
+  kubectl expose deployment petclinic --name=clusterip --port=80 --target-port=8080 
+
+- configure nginx to proxy traffic to this ip
 
 to delete:
 kubectl delete deployment,svc db petclinic
@@ -37,3 +38,10 @@ service
 2. kubectl expose deployment petclinic --name=nodeport --port=80 --target-port=8080 --type=NodePort
 
 3. kubectl expose deployment petclinic --name=loadbalancer --port=80 --target-port=8080 --type=LoadBalancer
+
+other useful info:
+k8s cheat sheet:
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+exposing app to the external world
+https://kubernetes.io/docs/tutorials/services/source-ip/
+
