@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: petclinic-http-https
+  namespace: default
+spec:
+  tls:
+  - hosts:
+    - c1-master1
+    secretName: petclinic-tls
+
+  rules:
+    - host: c1-master1
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: petclinic
+            servicePort: 8080
