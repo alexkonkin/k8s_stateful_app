@@ -8,14 +8,14 @@ metadata:
 spec:
   tls:
   - hosts:
-    - c1-master1
+      - c1-master1
     secretName: petclinic-tls
 
   rules:
     - host: c1-master1
       http:
         paths:
-        - path: /
-          backend:
-            serviceName: petclinic
-            servicePort: 8080
+          - path: /
+            backend:
+              serviceName: petclinic
+              servicePort: 8080
