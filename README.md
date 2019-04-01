@@ -7,7 +7,7 @@ to deploy:
   kubectl apply -f mysql_578.yml
 
 - create petclinic deployment and service
-kubectl apply -f petclinic.yml
+  kubectl apply -f petclinic.yml
 
 - create service that exposes application via the cluster ip
   kubectl expose deployment petclinic --name=clusterip --port=80 --target-port=8080 
@@ -15,8 +15,11 @@ kubectl apply -f petclinic.yml
 - configure nginx to proxy traffic to this ip
 
 to delete:
+
 kubectl delete deployment,svc db petclinic
+
 kubectl delete pvc mysql-data-claim mysql-init-claim
+
 kubectl delete pv mysql-data-volume mysql-init-volume
 
 get an IP of the petclinic service:
@@ -45,3 +48,8 @@ https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 exposing app to the external world
 https://kubernetes.io/docs/tutorials/services/source-ip/
 
+----
+misc:
+certificate generation
+
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout c1-master1.key -out c1-master1.crt -subj "/CN=c1-master1/O=c1-master1"
